@@ -1,0 +1,17 @@
+{
+  "name": "desystem",
+  "version": "1.0.0",
+  "description": "a higher-order design system",
+  "main": "index.js",
+  "author": "Reid Mitchell",
+  "license": "MIT",
+  "dependencies": {
+    "ajv": "^6.5.1"
+  },
+  "devDependencies": {
+    "jest": "^23.1.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
