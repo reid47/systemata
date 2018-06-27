@@ -3,10 +3,21 @@ const schema = require('./schema');
 const formatError = require('./format-error');
 const validate = ajv.compile(schema);
 
+class SchemaValidationError extends Error {
+  constructor(errors) {
+    super('Invalid configuration schema:' + errors.map(e => `\n  - ${e}`).join(''));
+  }
+}
+
 const validateConfig = config => {
   const valid = validate(config);
   if (valid) return;
   return [...validate.errors].map(error => formatError(config, error));
 };
 
-module.exports = { validateConfig, schema };
+const assertValidConfig = config => {
+  const errors = validateConfig(config);
+  if (errors) throw new SchemaValidationError(errors);
+};
+
+module.exports = { validateConfig, assertValidConfig, schema };

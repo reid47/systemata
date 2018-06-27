@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tokensToLess simple case 1`] = `
+"@color-primary: #f00;
+
+@color-secondary: #0f0;
+
+@color-tertiary: #00f;
+
+@spacing-sm: 8px;
+
+@spacing-md: 16px;
+
+@spacing-lg: 24px;
+"
+`;
+
+exports[`tokensToLess with a namespace 1`] = `
+"@rm-color-primary: #f00;
+
+@rm-color-secondary: #0f0;
+
+@rm-color-tertiary: #00f;
+
+@rm-spacing-sm: 8px;
+
+@rm-spacing-md: 16px;
+
+@rm-spacing-lg: 24px;
+"
+`;
+
+exports[`tokensToLess with comments 1`] = `
+"// This is the primary color.
+@color-primary: #f00;
+
+// This is the secondary color.
+// It should be used in some places.
+@color-secondary: #0f0;
+
+@color-tertiary: #00f;
+
+@spacing-sm: 8px;
+
+@spacing-md: 16px;
+
+@spacing-lg: 24px;
+"
+`;

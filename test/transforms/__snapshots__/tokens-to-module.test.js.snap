@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tokensToModule simple case 1`] = `
+"export const colorPrimary = '#f00';
+
+export const colorSecondary = '#0f0';
+
+export const colorTertiary = '#00f';
+
+export const spacingSm = '8px';
+
+export const spacingMd = '16px';
+
+export const spacingLg = '24px';
+"
+`;
+
+exports[`tokensToModule with a namespace 1`] = `
+"export const rmColorPrimary = '#f00';
+
+export const rmColorSecondary = '#0f0';
+
+export const rmColorTertiary = '#00f';
+
+export const rmSpacingSm = '8px';
+
+export const rmSpacingMd = '16px';
+
+export const rmSpacingLg = '24px';
+"
+`;
+
+exports[`tokensToModule with comments 1`] = `
+"// This is the primary color.
+export const colorPrimary = '#f00';
+
+// This is the secondary color.
+// It should be used in some places.
+export const colorSecondary = '#0f0';
+
+export const colorTertiary = '#00f';
+
+export const spacingSm = '8px';
+
+export const spacingMd = '16px';
+
+export const spacingLg = '24px';
+"
+`;

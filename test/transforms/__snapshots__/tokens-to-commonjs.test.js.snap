@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tokensToCommonJs simple case 1`] = `
+"module.exports = [
+  colorPrimary: '#f00',
+
+  colorSecondary: '#0f0',
+
+  colorTertiary: '#00f',
+
+  spacingSm: '8px',
+
+  spacingMd: '16px',
+
+  spacingLg: '24px'
+];"
+`;
+
+exports[`tokensToCommonJs with a namespace 1`] = `
+"module.exports = [
+  rmColorPrimary: '#f00',
+
+  rmColorSecondary: '#0f0',
+
+  rmColorTertiary: '#00f',
+
+  rmSpacingSm: '8px',
+
+  rmSpacingMd: '16px',
+
+  rmSpacingLg: '24px'
+];"
+`;
+
+exports[`tokensToCommonJs with comments 1`] = `
+"module.exports = [
+  // This is the primary color.
+  colorPrimary: '#f00',
+
+  // This is the secondary color.
+  // It should be used in some places.
+  colorSecondary: '#0f0',
+
+  colorTertiary: '#00f',
+
+  spacingSm: '8px',
+
+  spacingMd: '16px',
+
+  spacingLg: '24px'
+];"
+`;

@@ -10,7 +10,8 @@
         "name": { "type": "string" },
         "description": { "type": "string" },
         "namespace": { "type": "string" },
-        "version": { "type": "string" }
+        "version": { "type": "string" },
+        "importantModifiers": { "type": "boolean" }
       }
     },
     "tokens": {
