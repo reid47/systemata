@@ -1,9 +1,0 @@
-{
-  "tokens": {
-    "color": [
-      { "id": "primary", "name": "Primary color", "value": "#f00" },
-      { "id": "secondary", "name": "Secondary color", "value": "#0f0" },
-      { "id": "tertiary", "name": "Tertiary color", "value": "#00f" }
-    ]
-  }
-}
