@@ -1,59 +1,57 @@
-const { assertValidConfig } = require('./schema');
+export const capitalize = str => {
+  if (!str || !str.length) return str;
+  return str[0].toUpperCase() + str.substr(1);
+};
 
-const capitalize = str => (str.length < 1 ? str : str[0].toUpperCase() + str.substr(1));
-
-const kebabCaseVariableName = ({ tokenType, namespace, id }) => {
+export const kebabCaseVariableName = ({ tokenType, namespace, id }) => {
   return (namespace ? namespace + '-' : '') + tokenType + '-' + id;
 };
 
-const camelCaseVariableName = ({ tokenType, namespace, id }) => {
+export const camelCaseVariableName = ({ tokenType, namespace, id }) => {
   return kebabCaseVariableName({ tokenType, namespace, id })
     .split('-')
     .map((part, i) => (i === 0 ? part : capitalize(part)))
     .join('');
 };
 
-const withValidConfig = func => (config, options) => {
-  assertValidConfig(config);
-  return func(config, options);
-};
-
-const mapTokens = ({ tokens = {} }, func) => {
-  const result = [];
-
-  Object.keys(tokens).forEach(tokenType => {
-    (tokens[tokenType] || []).forEach(token => {
-      result.push(func({ tokenType, token }));
-    });
-  });
-
-  return result;
-};
-
-const toDoubleSlashComment = (text, indentLevel = 0) => {
+export const toLineComment = (text, indentLevel = 0) => {
   return text
     .split('\n')
     .map(s => `${' '.repeat(indentLevel)}// ${s.trim()}`)
     .join('\n');
 };
 
-const toSlashStarComment = (text, indentLevel = 0) => {
+export const toBlockComment = (text, indentLevel = 0) => {
   const indent = ' '.repeat(indentLevel);
-  return (
-    `${indent}/**\n` +
-    text
-      .split('\n')
-      .map(s => `${indent} * ${s.trim()}`)
-      .join('\n') +
-    `\n${indent} */`
-  );
+
+  return `${indent}/**\n${text
+    .split('\n')
+    .filter(line => line.trim())
+    .map(line => `${indent} * ${line.trim()}`)
+    .join('\n')}\n${indent} */`;
 };
 
-module.exports = {
-  withValidConfig,
-  mapTokens,
-  kebabCaseVariableName,
-  camelCaseVariableName,
-  toDoubleSlashComment,
-  toSlashStarComment
+export const mapSortedEntries = (obj, func) => {
+  return Object.keys(obj)
+    .sort()
+    .map((key, i) => func(key, obj[key], i));
+};
+
+export const filterBlankLines = lines => {
+  return lines.filter(line => !!line.trim());
+};
+
+export const joinLines = lines => {
+  if (!Array.isArray(lines)) return lines;
+  return lines.join('\n');
+};
+
+export const toSassVariable = (prefix, valueName, settings) => {
+  return `$${settings.namespace || ''}${prefix}${valueName}`;
+};
+
+export const toCssRule = (className, property, value, settings) => {
+  return `.${settings.namespace || ''}${className} { ${property}: ${value}${
+    settings.important ? ' !important' : ''
+  }; }`;
 };
