@@ -12,10 +12,8 @@ export class Compiler {
   }
 
   toString() {
-    if (this.output.format === 'css') {
-      return generateCss(this.config);
-    }
+    if (this.output.format === 'css') return generateCss(this.config);
 
-    return 'wow';
+    throw new Error('Unsupported output configuration');
   }
 }

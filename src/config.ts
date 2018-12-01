@@ -1,11 +1,11 @@
-import { NamespaceConfig, Config, ColorConfig } from './types';
+import { NamespaceConfig, Config, ColorConfig, PropertyMappingConfig } from './types';
 
 function resolveNamespace(namespaceConfig: any): NamespaceConfig | false {
   if (!namespaceConfig) return false;
 
-  if (typeof namespaceConfig === 'string') {
+  if (typeof namespaceConfig !== 'object') {
     return {
-      prefix: namespaceConfig,
+      prefix: typeof namespaceConfig === 'string' ? namespaceConfig : 'sys-',
       parentClass: false,
       peerClass: false
     };
@@ -18,15 +18,31 @@ function resolveNamespace(namespaceConfig: any): NamespaceConfig | false {
   };
 }
 
+function resolvePropertyMapping(mappingsConfig: any): PropertyMappingConfig {
+  mappingsConfig = (mappingsConfig || {}) as object;
+
+  const defaultMappings: PropertyMappingConfig = {
+    'background-color': 'bg',
+    'border-color': 'brc',
+    color: 'c',
+    fill: 'fill'
+  };
+
+  return { ...defaultMappings, ...mappingsConfig };
+}
+
 function resolveColors(colorConfig: any): ColorConfig {
   if (!colorConfig) return {};
   return colorConfig as ColorConfig;
 }
 
 export function resolveConfig(config: any): Config {
+  config.settings = config.settings || {};
+
   return {
     settings: {
-      namespace: resolveNamespace(config.namespace)
+      namespace: resolveNamespace(config.settings.namespace),
+      propertyMapping: resolvePropertyMapping(config.settings.propertyMapping)
     },
     colors: resolveColors(config.colors)
   };
