@@ -1,21 +1,28 @@
 import { resolveConfig } from './config';
-import { Config, OutputOptions } from './types';
+import { Config } from './types';
 import { generateCss } from './generate-css';
-import { buildRuleMap } from './rule-map';
+import { generateSass } from './generate-sass';
+import { buildRuleMap, buildVariableMap } from './rule-map';
 
 export class Compiler {
   config: Config;
-  output: OutputOptions;
 
-  constructor(config: any, output: OutputOptions) {
+  constructor(config: any) {
     this.config = resolveConfig(config);
-    this.output = output;
   }
 
   toString() {
-    const ruleMap = buildRuleMap(this.config);
+    const { output } = this.config;
 
-    if (this.output.format === 'css') return generateCss(ruleMap);
+    const variableMap = buildVariableMap(this.config);
+    const ruleMap = buildRuleMap(this.config, variableMap);
+
+    switch (output.format) {
+      case 'css':
+        return generateCss(ruleMap);
+      case 'sass':
+        return generateSass(variableMap, ruleMap);
+    }
 
     throw new Error('Unsupported output configuration');
   }

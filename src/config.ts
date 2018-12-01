@@ -1,4 +1,17 @@
-import { NamespaceConfig, Config, ColorConfig, PropertyMappingConfig, SpacingConfig } from './types';
+import {
+  NamespaceConfig,
+  Config,
+  ColorConfig,
+  PropertyMappingConfig,
+  SpacingConfig,
+  OutputConfig
+} from './types';
+
+function resolveOutput(outputConfig: any): OutputConfig {
+  return {
+    format: outputConfig.format
+  };
+}
 
 function resolveNamespace(namespaceConfig: any): NamespaceConfig | false {
   if (!namespaceConfig) return false;
@@ -63,6 +76,7 @@ export function resolveConfig(config: any): Config {
       namespace: resolveNamespace(config.settings.namespace),
       propertyMapping: resolvePropertyMapping(config.settings.propertyMapping)
     },
+    output: resolveOutput(config.output),
     color: resolveColors(config.color),
     spacing: resolveSpacing(config.spacing)
   };

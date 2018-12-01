@@ -1,5 +1,5 @@
 import { Compiler } from './compiler';
 
-export function generate(config: any, output: any): string {
-  return new Compiler(config, output).toString();
+export function generate(config: any): string {
+  return new Compiler(config).toString();
 }

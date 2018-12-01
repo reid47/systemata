@@ -5,6 +5,7 @@ const output = { format: 'css' };
 describe('namespace', () => {
   test('namespace (string)', () => {
     const config = {
+      output,
       settings: {
         namespace: 'rm-'
       },
@@ -14,11 +15,12 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 
   test('namespace (boolean)', () => {
     const config = {
+      output,
       settings: {
         namespace: true
       },
@@ -28,11 +30,12 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 
   test('namespace (object with prefix)', () => {
     const config = {
+      output,
       settings: {
         namespace: { prefix: 'wow-' }
       },
@@ -42,11 +45,12 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 
   test('namespace (object with parentClass)', () => {
     const config = {
+      output,
       settings: {
         namespace: { parentClass: 'parent' }
       },
@@ -56,11 +60,12 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 
   test('namespace (object with peerClass)', () => {
     const config = {
+      output,
       settings: {
         namespace: { peerClass: 'peer' }
       },
@@ -70,11 +75,12 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 
   test('namespace (object with multiple namespace types)', () => {
     const config = {
+      output,
       settings: {
         namespace: {
           prefix: 'pfx-',
@@ -88,13 +94,14 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 });
 
 describe('propertyMapping', () => {
   test('renaming properties', () => {
     const config = {
+      output,
       settings: {
         propertyMapping: {
           color: 'my-name-for-color'
@@ -106,11 +113,12 @@ describe('propertyMapping', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 
   test('excluding properties', () => {
     const config = {
+      output,
       settings: {
         propertyMapping: {
           fill: false
@@ -122,6 +130,6 @@ describe('propertyMapping', () => {
       }
     };
 
-    expect(generate(config, output)).toMatchSnapshot();
+    expect(generate(config)).toMatchSnapshot();
   });
 });

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color styles 1`] = `
+"$color-primary: #f00;
+$color-secondary: #0f0;
+.bg-primary { background-color: $color-primary }
+.bg-secondary { background-color: $color-secondary }
+.brc-primary { border-color: $color-primary }
+.brc-secondary { border-color: $color-secondary }
+.c-primary { color: $color-primary }
+.c-secondary { color: $color-secondary }
+.fill-primary { fill: $color-primary }
+.fill-secondary { fill: $color-secondary }"
+`;

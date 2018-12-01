@@ -3,9 +3,13 @@ export interface Config {
     namespace: NamespaceConfig | false;
     propertyMapping: PropertyMappingConfig;
   };
-
+  output: OutputConfig;
   color: ColorConfig;
   spacing: SpacingConfig;
+}
+
+export interface OutputConfig {
+  format: 'css' | 'sass';
 }
 
 export interface ColorConfig {
@@ -32,6 +36,8 @@ export interface PropertyMappingConfig {
 
 export type RuleMap = Map<string, CssRule>;
 
+export type VariableMap = Map<string, Variable>;
+
 export type CssPropertyType = 'color' | 'spacing';
 
 export interface CssProperty {
@@ -47,6 +53,8 @@ export interface CssRule {
   properties: CssProperty[];
 }
 
-export interface OutputOptions {
-  format: 'css' | 'sass';
+export interface Variable {
+  type: CssPropertyType;
+  name: string;
+  value: string;
 }
