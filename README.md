@@ -1,4 +1,4 @@
-# desystem
+# systematic
 
 a higher-order design system
 
