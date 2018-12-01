@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CSS generation works 1`] = `
+".color-primary { color: #f00 }
+.color-secondary { color: #0f0 }"
+`;
