@@ -8,7 +8,7 @@ describe('namespace', () => {
       settings: {
         namespace: 'rm-'
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -22,7 +22,7 @@ describe('namespace', () => {
       settings: {
         namespace: true
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -36,7 +36,7 @@ describe('namespace', () => {
       settings: {
         namespace: { prefix: 'wow-' }
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -50,7 +50,7 @@ describe('namespace', () => {
       settings: {
         namespace: { parentClass: 'parent' }
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -64,7 +64,7 @@ describe('namespace', () => {
       settings: {
         namespace: { peerClass: 'peer' }
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -82,7 +82,7 @@ describe('namespace', () => {
           peerClass: 'peer'
         }
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -100,7 +100,7 @@ describe('propertyMapping', () => {
           color: 'my-name-for-color'
         }
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }
@@ -116,7 +116,7 @@ describe('propertyMapping', () => {
           fill: false
         }
       },
-      colors: {
+      color: {
         primary: '#f00',
         secondary: '#0f0'
       }

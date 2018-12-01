@@ -10,3 +10,34 @@ exports[`color styles 1`] = `
 .fill-primary { fill: #f00 }
 .fill-secondary { fill: #0f0 }"
 `;
+
+exports[`spacing styles 1`] = `
+".m-small { margin: 8px }
+.m-large { margin: 64px }
+.mt-small { margin-top: 8px }
+.mt-large { margin-top: 64px }
+.mb-small { margin-bottom: 8px }
+.mb-large { margin-bottom: 64px }
+.ml-small { margin-left: 8px }
+.ml-large { margin-left: 64px }
+.mr-small { margin-right: 8px }
+.mr-large { margin-right: 64px }
+.mv-small { margin-top: 8px; margin-bottom: 8px }
+.mv-large { margin-top: 64px; margin-bottom: 64px }
+.mh-small { margin-left: 8px; margin-right: 8px }
+.mh-large { margin-left: 64px; margin-right: 64px }
+.p-small { padding: 8px }
+.p-large { padding: 64px }
+.pt-small { padding-top: 8px }
+.pt-large { padding-top: 64px }
+.pb-small { padding-bottom: 8px }
+.pb-large { padding-bottom: 64px }
+.pl-small { padding-left: 8px }
+.pl-large { padding-left: 64px }
+.pr-small { padding-right: 8px }
+.pr-large { padding-right: 64px }
+.pv-small { padding-top: 8px; padding-bottom: 8px }
+.pv-large { padding-top: 64px; padding-bottom: 64px }
+.ph-small { padding-left: 8px; padding-right: 8px }
+.ph-large { padding-left: 64px; padding-right: 64px }"
+`;

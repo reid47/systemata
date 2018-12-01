@@ -1,32 +1,16 @@
-import { Config } from './types';
+import { RuleMap, CssRule } from './types';
 
-const colorProperties = ['background-color', 'border-color', 'color', 'fill'];
-
-function makeClassName(base: string, config: Config) {
-  const { settings } = config;
-  if (!settings || !settings.namespace) return `.${base}`;
-  const { prefix, peerClass, parentClass } = settings.namespace;
-  return `${parentClass ? `.${parentClass} ` : ''}${peerClass ? `.${peerClass}` : ''}.${prefix ||
-    ''}${base}`;
+function formatCssRule(rule: CssRule): string {
+  return `${rule.selector} { ${rule.properties
+    .map(prop => `${prop.property}: ${prop.value}`)
+    .join('; ')} }`;
 }
 
-function makeCssRule(selector: string, property: string, value: string) {
-  return `${selector} { ${property}: ${value} }`;
-}
-
-export function generateCss(config: Config): string {
+export function generateCss(ruleMap: RuleMap): string {
   const output: string[] = [];
 
-  if (config.colors) {
-    for (const colorProperty of colorProperties) {
-      const colorKey = config.settings.propertyMapping[colorProperty];
-      if (!colorKey) continue;
-
-      for (const colorName in config.colors) {
-        const className = makeClassName(`${colorKey}-${colorName}`, config);
-        output.push(makeCssRule(className, colorProperty, config.colors[colorName]));
-      }
-    }
+  for (const rule of ruleMap.values()) {
+    output.push(formatCssRule(rule));
   }
 
   return output.join('\n');

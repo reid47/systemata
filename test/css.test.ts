@@ -4,9 +4,20 @@ const output = { format: 'css' };
 
 test('color styles', () => {
   const config = {
-    colors: {
+    color: {
       primary: '#f00',
       secondary: '#0f0'
+    }
+  };
+
+  expect(generate(config, output)).toMatchSnapshot();
+});
+
+test('spacing styles', () => {
+  const config = {
+    spacing: {
+      small: '8px',
+      large: '64px'
     }
   };
 

@@ -4,10 +4,15 @@ export interface Config {
     propertyMapping: PropertyMappingConfig;
   };
 
-  colors: ColorConfig;
+  color: ColorConfig;
+  spacing: SpacingConfig;
 }
 
 export interface ColorConfig {
+  [name: string]: string;
+}
+
+export interface SpacingConfig {
   [name: string]: string;
 }
 
@@ -23,6 +28,23 @@ export interface PropertyMappingConfig {
   'border-color': string | boolean;
   color: string | boolean;
   fill: string | boolean;
+}
+
+export type RuleMap = Map<string, CssRule>;
+
+export type CssPropertyType = 'color' | 'spacing';
+
+export interface CssProperty {
+  property: string;
+  value: string;
+}
+
+export interface CssRule {
+  type: CssPropertyType;
+  selector: string;
+  atRule?: string;
+  important?: boolean;
+  properties: CssProperty[];
 }
 
 export interface OutputOptions {

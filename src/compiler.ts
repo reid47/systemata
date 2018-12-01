@@ -1,6 +1,7 @@
 import { resolveConfig } from './config';
 import { Config, OutputOptions } from './types';
 import { generateCss } from './generate-css';
+import { buildRuleMap } from './rule-map';
 
 export class Compiler {
   config: Config;
@@ -12,7 +13,9 @@ export class Compiler {
   }
 
   toString() {
-    if (this.output.format === 'css') return generateCss(this.config);
+    const ruleMap = buildRuleMap(this.config);
+
+    if (this.output.format === 'css') return generateCss(ruleMap);
 
     throw new Error('Unsupported output configuration');
   }

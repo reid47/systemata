@@ -1,4 +1,4 @@
-import { NamespaceConfig, Config, ColorConfig, PropertyMappingConfig } from './types';
+import { NamespaceConfig, Config, ColorConfig, PropertyMappingConfig, SpacingConfig } from './types';
 
 function resolveNamespace(namespaceConfig: any): NamespaceConfig | false {
   if (!namespaceConfig) return false;
@@ -25,7 +25,21 @@ function resolvePropertyMapping(mappingsConfig: any): PropertyMappingConfig {
     'background-color': 'bg',
     'border-color': 'brc',
     color: 'c',
-    fill: 'fill'
+    fill: 'fill',
+    margin: 'm',
+    'margin-bottom': 'mb',
+    'margin-left': 'ml',
+    'margin-right': 'mr',
+    'margin-top': 'mt',
+    'margin-top,margin-bottom': 'mv',
+    'margin-left,margin-right': 'mh',
+    padding: 'p',
+    'padding-bottom': 'pb',
+    'padding-left': 'pl',
+    'padding-right': 'pr',
+    'padding-top': 'pt',
+    'padding-top,padding-bottom': 'pv',
+    'padding-left,padding-right': 'ph'
   };
 
   return { ...defaultMappings, ...mappingsConfig };
@@ -36,6 +50,11 @@ function resolveColors(colorConfig: any): ColorConfig {
   return colorConfig as ColorConfig;
 }
 
+function resolveSpacing(spacingConfig: any): SpacingConfig {
+  if (!spacingConfig) return {};
+  return spacingConfig as SpacingConfig;
+}
+
 export function resolveConfig(config: any): Config {
   config.settings = config.settings || {};
 
@@ -44,6 +63,7 @@ export function resolveConfig(config: any): Config {
       namespace: resolveNamespace(config.settings.namespace),
       propertyMapping: resolvePropertyMapping(config.settings.propertyMapping)
     },
-    colors: resolveColors(config.colors)
+    color: resolveColors(config.color),
+    spacing: resolveSpacing(config.spacing)
   };
 }
