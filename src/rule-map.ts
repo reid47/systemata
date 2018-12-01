@@ -20,6 +20,11 @@ const propertiesByType: { [type in CssPropertyType]: string[] } = {
   ]
 };
 
+const variableNamePrefix: { [key: string]: string } = {
+  sass: '$',
+  less: '@'
+};
+
 function makeClassName(base: string, config: Config) {
   const { settings } = config;
   if (!settings || !settings.namespace) return `.${base}`;
@@ -29,9 +34,10 @@ function makeClassName(base: string, config: Config) {
 }
 
 function makeVariableName(base: string, config: Config) {
-  const { settings } = config;
-  if (!settings || !settings.namespace || !settings.namespace.prefix) return `$${base}`;
-  return `$${settings.namespace.prefix}-${base}`;
+  const { settings, output } = config;
+  const varPrefix = variableNamePrefix[output.format] || '';
+  if (!settings || !settings.namespace || !settings.namespace.prefix) return `${varPrefix}${base}`;
+  return `${varPrefix}${settings.namespace.prefix}-${base}`;
 }
 
 function makeCssRule(
