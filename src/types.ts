@@ -9,7 +9,7 @@ export interface Config {
 }
 
 export interface OutputConfig {
-  format: 'css' | 'sass' | 'less';
+  format: 'css' | 'sass' | 'less' | 'css-variables';
 }
 
 export interface ColorConfig {

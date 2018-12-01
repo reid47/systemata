@@ -22,7 +22,8 @@ const propertiesByType: { [type in CssPropertyType]: string[] } = {
 
 const variableNamePrefix: { [key: string]: string } = {
   sass: '$',
-  less: '@'
+  less: '@',
+  'css-variables': '--'
 };
 
 function makeClassName(base: string, config: Config) {
@@ -38,6 +39,11 @@ function makeVariableName(base: string, config: Config) {
   const varPrefix = variableNamePrefix[output.format] || '';
   if (!settings || !settings.namespace || !settings.namespace.prefix) return `${varPrefix}${base}`;
   return `${varPrefix}${settings.namespace.prefix}-${base}`;
+}
+
+function makeVariableUsage(variableName: string, config: Config) {
+  if (config.output.format === 'css-variables') return `var(${variableName})`;
+  return variableName;
 }
 
 function makeCssRule(
@@ -66,7 +72,7 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
         const variableName = makeVariableName(`${propertyType}-${name}`, config);
 
         const value = variableMap.has(variableName)
-          ? variableName
+          ? makeVariableUsage(variableName, config)
           : config[propertyType as CssPropertyType][name];
 
         ruleMap.set(className, makeCssRule(propertyType as CssPropertyType, className, property, value));

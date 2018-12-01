@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`color styles 1`] = `
+":root {
+  --color-primary: #f00;
+  --color-secondary: #0f0;
+}
+.bg-primary { background-color: var(--color-primary) }
+.bg-secondary { background-color: var(--color-secondary) }
+.brc-primary { border-color: var(--color-primary) }
+.brc-secondary { border-color: var(--color-secondary) }
+.c-primary { color: var(--color-primary) }
+.c-secondary { color: var(--color-secondary) }
+.fill-primary { fill: var(--color-primary) }
+.fill-secondary { fill: var(--color-secondary) }"
+`;
+
+exports[`spacing styles 1`] = `
+":root {
+  --spacing-small: 8px;
+  --spacing-large: 64px;
+}
+.m-small { margin: var(--spacing-small) }
+.m-large { margin: var(--spacing-large) }
+.mt-small { margin-top: var(--spacing-small) }
+.mt-large { margin-top: var(--spacing-large) }
+.mb-small { margin-bottom: var(--spacing-small) }
+.mb-large { margin-bottom: var(--spacing-large) }
+.ml-small { margin-left: var(--spacing-small) }
+.ml-large { margin-left: var(--spacing-large) }
+.mr-small { margin-right: var(--spacing-small) }
+.mr-large { margin-right: var(--spacing-large) }
+.mv-small { margin-top: var(--spacing-small); margin-bottom: var(--spacing-small) }
+.mv-large { margin-top: var(--spacing-large); margin-bottom: var(--spacing-large) }
+.mh-small { margin-left: var(--spacing-small); margin-right: var(--spacing-small) }
+.mh-large { margin-left: var(--spacing-large); margin-right: var(--spacing-large) }
+.p-small { padding: var(--spacing-small) }
+.p-large { padding: var(--spacing-large) }
+.pt-small { padding-top: var(--spacing-small) }
+.pt-large { padding-top: var(--spacing-large) }
+.pb-small { padding-bottom: var(--spacing-small) }
+.pb-large { padding-bottom: var(--spacing-large) }
+.pl-small { padding-left: var(--spacing-small) }
+.pl-large { padding-left: var(--spacing-large) }
+.pr-small { padding-right: var(--spacing-small) }
+.pr-large { padding-right: var(--spacing-large) }
+.pv-small { padding-top: var(--spacing-small); padding-bottom: var(--spacing-small) }
+.pv-large { padding-top: var(--spacing-large); padding-bottom: var(--spacing-large) }
+.ph-small { padding-left: var(--spacing-small); padding-right: var(--spacing-small) }
+.ph-large { padding-left: var(--spacing-large); padding-right: var(--spacing-large) }"
+`;
