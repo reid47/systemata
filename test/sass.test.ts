@@ -13,3 +13,15 @@ test('color styles', () => {
 
   expect(generate(config)).toMatchSnapshot();
 });
+
+test('spacing styles', () => {
+  const config = {
+    output,
+    spacing: {
+      small: '8px',
+      large: '64px'
+    }
+  };
+
+  expect(generate(config)).toMatchSnapshot();
+});

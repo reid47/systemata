@@ -1,10 +1,5 @@
-import { RuleMap, CssRule } from './types';
-
-function formatCssRule(rule: CssRule): string {
-  return `${rule.selector} { ${rule.properties
-    .map(prop => `${prop.property}: ${prop.value}`)
-    .join('; ')} }`;
-}
+import { RuleMap } from './types';
+import { formatCssRule } from './utils';
 
 export function generateCss(ruleMap: RuleMap): string {
   const output: string[] = [];
