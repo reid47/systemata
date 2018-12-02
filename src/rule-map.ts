@@ -1,4 +1,4 @@
-import { Config, CssPropertyType, CssRule, RuleMap, VariableMap } from './types';
+import { Config, CssPropertyType, CssRule, RuleMap, VariableMap, Variable } from './types';
 
 const propertiesByType: { [type in CssPropertyType]: string[] } = {
   color: ['background-color', 'border-color', 'color', 'fill'],
@@ -58,7 +58,7 @@ function makeCssRule(
 }
 
 export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap {
-  const ruleMap: RuleMap = new Map();
+  const ruleMap = new Map<string, CssRule>();
 
   for (const propertyType in propertiesByType) {
     const properties = propertiesByType[propertyType as CssPropertyType];
@@ -88,7 +88,7 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
 }
 
 export function buildVariableMap(config: Config): VariableMap {
-  const variableMap: VariableMap = new Map();
+  const variableMap = new Map<string, Variable>();
 
   if (config.output.format === 'css') return variableMap;
 
