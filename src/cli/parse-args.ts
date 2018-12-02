@@ -1,22 +1,32 @@
 const isFlag = (arg: string) => arg && /^-[-]?[a-z\-]+/i.test(arg);
 
-export function parseArgs(args: string[]) {
-  const argsObject: { [key: string]: string | boolean } = {};
+export const knownCommands = ['init', 'develop', 'build'];
 
-  let command: string = '';
+export const knownArgs: { [key: string]: string } = {
+  '-h': 'help',
+  '--help': 'help',
+  '-v': 'version',
+  '--version': 'version'
+};
+
+export function parseArgs(argv: string[]) {
+  const args: { [key: string]: string | boolean } = {};
+
+  let command: string | null = null;
   let lastArg: string;
 
-  process.argv.slice(2).forEach((arg, index) => {
-    if (index === 0 && !isFlag(arg)) {
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i];
+
+    if (i === 0 && knownCommands.includes(arg)) {
       command = arg;
-    } else if (isFlag(lastArg)) {
-      argsObject[lastArg] = arg;
-    } else {
-      argsObject[arg] = true;
+      continue;
     }
 
-    lastArg = arg;
-  });
+    if (knownArgs[arg]) {
+      args[knownArgs[arg]] = true;
+    }
+  }
 
-  return { args: argsObject, command };
+  return { args, command };
 }
