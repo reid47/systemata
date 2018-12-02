@@ -7,6 +7,13 @@ export interface Config {
   spacing: SpacingConfig;
 }
 
+export interface ArchivedConfig extends Config {
+  __archived: {
+    archiveDate: string;
+    systematicVersion: string;
+  };
+}
+
 export interface SystemConfig {
   [key: string]: string | undefined;
   name: string;
@@ -16,6 +23,7 @@ export interface SystemConfig {
 
 export interface OutputConfig {
   format: 'css' | 'sass' | 'less' | 'css-variables' | 'docs';
+  archiveDirectory: string;
 }
 
 export interface ValueDefinition {
@@ -72,7 +80,7 @@ export interface Variable {
 }
 
 export interface CliInput {
-  command?: 'init' | 'develop' | 'build';
+  command?: 'archive' | 'build' | 'develop' | 'init';
   args: {
     help?: boolean;
     version?: boolean;

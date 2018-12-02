@@ -1,15 +1,19 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Config, CliInput } from '../types';
-import { resolveConfig } from '../config';
-import { error } from './error';
+import { Config, CliInput } from '../../types';
+import { resolveConfig } from '../../config';
+import { error } from '../error';
 
 const configFileTemplate = (config: Config) => `module.exports = {
   system: {
     name: ${JSON.stringify(config.system.name)},
     version: ${JSON.stringify(config.system.version)},
     description: ${JSON.stringify(config.system.description)}
+  },
+  output: {
+    archiveDirectory: ${JSON.stringify(config.output.archiveDirectory)},
+    format: "css"
   },
   colors: {},
   spacing: {}

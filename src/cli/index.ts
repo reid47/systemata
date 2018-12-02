@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-import { build } from './build';
+import { develop } from './commands/develop';
+import { build } from './commands/build';
 import { version } from '../../package.json';
 import { parseArgs, knownCommands } from './parse-args';
 import { usage } from './usage';
-import { init } from './init';
+import { init } from './commands/init';
 import { error } from './error';
+import { archive } from './commands/archive';
 
 const input = parseArgs(process.argv.slice(2));
 
@@ -20,8 +22,8 @@ if (input.args.version) {
 }
 
 switch (input.command) {
-  case 'init':
-    init(input);
+  case 'archive':
+    archive(input);
     break;
 
   case 'build':
@@ -29,7 +31,11 @@ switch (input.command) {
     break;
 
   case 'develop':
-    // todo :)
+    develop(input);
+    break;
+
+  case 'init':
+    init(input);
     break;
 
   case undefined:

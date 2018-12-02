@@ -22,7 +22,8 @@ function resolveOutput(outputConfig: any): OutputConfig {
   outputConfig = outputConfig || {};
 
   return {
-    format: outputConfig.format || 'css'
+    format: outputConfig.format || 'css',
+    archiveDirectory: outputConfig.archiveDirectory || './systematic-archive'
   };
 }
 

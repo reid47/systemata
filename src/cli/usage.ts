@@ -1,20 +1,24 @@
-import { version, description } from '../../package.json';
+import { name, version, description } from '../../package.json';
 
-export const usage = `systematic (version ${version})
+export const usage = `${name} (version ${version})
   ${description}
 
 Usage:
-  systematic [options]
-  systematic init [init options]
-  systematic build [build options]
+  ${name} [options]
+  ${name} init [init options]
+  ${name} develop [develop options]
+  ${name} build [build options]
 
 Options:
-  -v, --version           print systematic version
   -h, --help              print this usage info
+  -v, --version           print ${name} version
 
 'init' options:
   -c, --config            path where config file will be created
-  -y, --yes               skip init questions, use defaults
+  -y, --yes               skip questions, use default initial settings
+
+'develop' options:
+  -c, --config            path to config file
 
 'build' options:
   -c, --config            path to config file

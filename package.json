@@ -12,7 +12,6 @@
   "bin": {
     "systematic": "dist/src/cli/index.js"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^23.3.10",
     "@types/node": "^10.12.11",
