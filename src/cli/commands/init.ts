@@ -15,7 +15,7 @@ const configFileTemplate = (config: Config) => `module.exports = {
     archiveDirectory: ${JSON.stringify(config.output.archiveDirectory)},
     format: "css"
   },
-  colors: {},
+  color: {},
   spacing: {}
 };`;
 

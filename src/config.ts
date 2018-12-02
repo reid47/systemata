@@ -7,13 +7,21 @@ import {
   OutputConfig,
   SystemConfig
 } from './types';
+import { parseSemVer } from './utils';
 
 function resolveSystem(systemConfig: any): SystemConfig {
   systemConfig = systemConfig || {};
 
+  const version = systemConfig.version || '0.0.1';
+  if (!parseSemVer(version).valid) {
+    throw new Error(
+      `Invalid value for system.version: '${version}'. This should be a three-part version string (e.g. '0.1.2').`
+    );
+  }
+
   return {
     name: systemConfig.name || 'untitled-system',
-    version: systemConfig.version || '0.0.1',
+    version,
     description: systemConfig.description || ''
   };
 }
