@@ -8,6 +8,7 @@ export interface Config {
 }
 
 export interface SystemConfig {
+  [key: string]: string | undefined;
   name: string;
   version: string;
   description?: string;

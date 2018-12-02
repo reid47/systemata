@@ -13,12 +13,14 @@ function resolveSystem(systemConfig: any): SystemConfig {
 
   return {
     name: systemConfig.name || 'untitled-system',
-    version: systemConfig.version || 'version',
+    version: systemConfig.version || '0.0.1',
     description: systemConfig.description || ''
   };
 }
 
 function resolveOutput(outputConfig: any): OutputConfig {
+  outputConfig = outputConfig || {};
+
   return {
     format: outputConfig.format || 'css'
   };
@@ -72,6 +74,8 @@ function resolveSpacing(spacingConfig: any): SpacingConfig {
 }
 
 export function resolveConfig(config: any): Config {
+  config = config || {};
+
   return {
     system: resolveSystem(config.system),
     namespace: resolveNamespace(config.namespace),

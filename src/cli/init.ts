@@ -1,13 +1,18 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 import * as path from 'path';
-import { printJsObject } from '../utils';
+import { Config } from '../types';
+import { resolveConfig } from '../config';
 
-const defaultConfig: { [key: string]: any } = {
-  name: 'untitled-system',
-  version: '0.0.1',
-  colors: {}
-};
+const configFileTemplate = (config: Config) => `module.exports = {
+  system: {
+    name: ${JSON.stringify(config.system.name)},
+    version: ${JSON.stringify(config.system.version)},
+    description: ${JSON.stringify(config.system.description)}
+  },
+  colors: {},
+  spacing: {}
+};`;
 
 const prompts = [{ text: 'System name', key: 'name' }, { text: 'Initial version', key: 'version' }];
 
@@ -16,11 +21,11 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-function ask(config: typeof defaultConfig, done: (config: typeof defaultConfig) => void, promptIndex = 0) {
+function ask(config: Config, done: (config: Config) => void, promptIndex = 0) {
   const prompt = prompts[promptIndex];
 
-  rl.question(`${prompt.text} (default: '${defaultConfig[prompt.key]}'): `, answer => {
-    if (answer) config[prompt.key] = answer;
+  rl.question(`${prompt.text} (default: '${config.system[prompt.key]}'): `, answer => {
+    if (answer) config.system[prompt.key] = answer;
 
     if (promptIndex === prompts.length - 1) {
       rl.close();
@@ -43,18 +48,16 @@ function writeFile(configFile: string, contents: string) {
   }
 }
 
-function toJs(config: typeof defaultConfig) {
-  return `module.exports = ${printJsObject(config)}`;
-}
-
 export function init(configFile: string, skipQuestions: boolean) {
+  const defaultConfig = resolveConfig({});
+
   if (skipQuestions) {
-    const output = toJs(defaultConfig);
+    const output = configFileTemplate(defaultConfig);
     return writeFile(configFile, output);
   }
 
   ask(defaultConfig, userConfig => {
-    const output = toJs(userConfig);
+    const output = configFileTemplate(userConfig);
     writeFile(configFile, output);
   });
 }
