@@ -5,6 +5,10 @@
   "main": "dist/src/index.js",
   "author": "Reid Mitchell",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reid47/systematic.git"
+  },
   "bin": {
     "systematic": "dist/src/cli/index.js"
   },
