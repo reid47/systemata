@@ -5,17 +5,20 @@ import {
   PropertyMappingConfig,
   SpacingConfig,
   OutputConfig,
-  SystemConfig
+  SystemConfig,
+  OutputFileConfig
 } from './types';
 import { parseSemVer } from './utils';
+import { ConfigurationError } from './config-error';
 
 function resolveSystem(systemConfig: any): SystemConfig {
   systemConfig = systemConfig || {};
 
   const version = systemConfig.version || '0.0.1';
   if (!parseSemVer(version).valid) {
-    throw new Error(
-      `Invalid value for system.version: '${version}'. This should be a three-part version string (e.g. '0.1.2').`
+    throw new ConfigurationError(
+      'system.version',
+      `'${version}' is not a three-part version string (e.g. '0.1.2').`
     );
   }
 
@@ -29,9 +32,26 @@ function resolveSystem(systemConfig: any): SystemConfig {
 function resolveOutput(outputConfig: any): OutputConfig {
   outputConfig = outputConfig || {};
 
+  const files: OutputFileConfig[] = [];
+
+  (outputConfig.files || []).forEach((file: any, index: number) => {
+    file = file || {};
+
+    const fileName = file.fileName || '';
+    if (!fileName) {
+      throw new ConfigurationError(`output.files[${index}].fileName`, 'File name must be specified.');
+    }
+
+    files.push({
+      format: file.format || 'css',
+      fileName
+    });
+  });
+
   return {
-    format: outputConfig.format || 'css',
-    archiveDirectory: outputConfig.archiveDirectory || './systematic-archive'
+    buildDirectory: outputConfig.buildDirectory || './systematic-build',
+    archiveDirectory: outputConfig.archiveDirectory || './systematic-archive',
+    files
   };
 }
 

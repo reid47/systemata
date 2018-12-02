@@ -21,9 +21,21 @@ export interface SystemConfig {
   description?: string;
 }
 
+export type OutputFileFormat = 'css' | 'sass' | 'less' | 'css-variables' | 'docs';
+
+export interface OutputFileConfig {
+  format: OutputFileFormat;
+  fileName: string;
+}
+
+export interface GeneratedFile extends OutputFileConfig {
+  content: string;
+}
+
 export interface OutputConfig {
-  format: 'css' | 'sass' | 'less' | 'css-variables' | 'docs';
+  buildDirectory: string;
   archiveDirectory: string;
+  files: OutputFileConfig[];
 }
 
 export interface ValueDefinition {
@@ -62,7 +74,7 @@ export type CssPropertyType = 'color' | 'spacing';
 
 export interface CssProperty {
   property: string;
-  value: string;
+  value: string | Variable;
 }
 
 export interface CssRule {

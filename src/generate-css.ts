@@ -5,7 +5,7 @@ export function generateCss(ruleMap: RuleMap): string {
   const output: string[] = [];
 
   for (const rule of ruleMap.values()) {
-    output.push(formatCssRule(rule));
+    output.push(formatCssRule(rule, 'css'));
   }
 
   return output.join('\n');

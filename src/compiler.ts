@@ -1,5 +1,5 @@
 import { resolveConfig } from './config';
-import { Config } from './types';
+import { Config, OutputFileConfig, VariableMap, RuleMap, GeneratedFile } from './types';
 import { generateCss } from './generate-css';
 import { generateSass } from './generate-sass';
 import { generateLess } from './generate-less';
@@ -14,25 +14,41 @@ export class Compiler {
     this.config = resolveConfig(config);
   }
 
-  toString() {
+  generateFile(file: OutputFileConfig, variableMap: VariableMap, ruleMap: RuleMap): GeneratedFile {
+    const { fileName, format } = file;
+
+    let content = '';
+    switch (format) {
+      case 'css':
+        content = generateCss(ruleMap);
+        break;
+
+      case 'sass':
+        content = generateSass(variableMap, ruleMap);
+        break;
+
+      case 'less':
+        content = generateLess(variableMap, ruleMap);
+        break;
+
+      case 'css-variables':
+        content = generateCssVariables(variableMap, ruleMap);
+        break;
+
+      case 'docs':
+        content = generateDocs(variableMap, ruleMap);
+        break;
+    }
+
+    return { fileName, format, content };
+  }
+
+  generate(): GeneratedFile[] {
     const { output } = this.config;
 
     const variableMap = buildVariableMap(this.config);
     const ruleMap = buildRuleMap(this.config, variableMap);
 
-    switch (output.format) {
-      case 'css':
-        return generateCss(ruleMap);
-      case 'sass':
-        return generateSass(variableMap, ruleMap);
-      case 'less':
-        return generateLess(variableMap, ruleMap);
-      case 'css-variables':
-        return generateCssVariables(variableMap, ruleMap);
-      case 'docs':
-        return generateDocs(variableMap, ruleMap);
-    }
-
-    throw new Error('Unsupported output configuration');
+    return output.files.map(file => this.generateFile(file, variableMap, ruleMap));
   }
 }

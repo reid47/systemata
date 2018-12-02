@@ -1,6 +1,8 @@
-import { generate } from '../src/index';
+import { getContent } from './test-utils';
 
-const output = { format: 'css-variables' };
+const output = {
+  files: [{ format: 'css-variables', fileName: 'test.scss' }]
+};
 
 test('color styles', () => {
   const config = {
@@ -11,7 +13,7 @@ test('color styles', () => {
     }
   };
 
-  expect(generate(config)).toMatchSnapshot();
+  expect(getContent(config)).toMatchSnapshot();
 });
 
 test('spacing styles', () => {
@@ -23,5 +25,5 @@ test('spacing styles', () => {
     }
   };
 
-  expect(generate(config)).toMatchSnapshot();
+  expect(getContent(config)).toMatchSnapshot();
 });

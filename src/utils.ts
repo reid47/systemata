@@ -1,13 +1,57 @@
-import { CssRule, Variable } from './types';
+import { CssRule, Variable, OutputFileFormat } from './types';
 
-export function formatCssRule(rule: CssRule): string {
+export function formatCssRule(rule: CssRule, format: OutputFileFormat): string {
   return `${rule.selector} { ${rule.properties
-    .map(prop => `${prop.property}: ${prop.value}`)
+    .map(prop => {
+      let value;
+
+      if (typeof prop.value !== 'string') {
+        switch (format) {
+          case 'sass':
+            value = `$${prop.value.name}`;
+            break;
+
+          case 'less':
+            value = `@${prop.value.name}`;
+            break;
+
+          case 'css-variables':
+            value = `var(--${prop.value.name})`;
+            break;
+
+          default:
+            value = prop.value.value;
+        }
+      } else {
+        value = prop.value;
+      }
+
+      return `${prop.property}: ${value}`;
+    })
     .join('; ')} }`;
 }
 
-export function formatVariableDeclaration(variable: Variable) {
-  return `${variable.name}: ${variable.value};`;
+export function formatVariableDeclaration(variable: Variable, format: OutputFileFormat) {
+  let name;
+
+  switch (format) {
+    case 'sass':
+      name = `$${variable.name}`;
+      break;
+
+    case 'less':
+      name = `@${variable.name}`;
+      break;
+
+    case 'css-variables':
+      name = `--${variable.name}`;
+      break;
+
+    default:
+      throw new Error('Unexpected format: ' + format);
+  }
+
+  return `${name}: ${variable.value};`;
 }
 
 export function capitalizeWord(word: string) {
@@ -42,4 +86,19 @@ export function parseSemVer(version: string) {
   }
 
   return result;
+}
+
+export function pathGet(obj: any, path: string[]): any {
+  if (path.length === 1) return obj[path[0]];
+
+  return pathGet(obj[path[0]], path.slice(1));
+}
+
+export function pathSet(obj: any, path: string[], value: any): any {
+  if (path.length === 1) {
+    obj[path[0]] = value;
+    return;
+  }
+
+  return pathSet(obj[path[0]], path.slice(1), value);
 }

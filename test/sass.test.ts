@@ -1,6 +1,10 @@
 import { generate } from '../src/index';
 
-const output = { format: 'sass' };
+const getContent = (config: any) => generate(config)[0].content;
+
+const output = {
+  files: [{ format: 'sass', fileName: 'test.scss' }]
+};
 
 test('color styles', () => {
   const config = {
@@ -11,7 +15,7 @@ test('color styles', () => {
     }
   };
 
-  expect(generate(config)).toMatchSnapshot();
+  expect(getContent(config)).toMatchSnapshot();
 });
 
 test('spacing styles', () => {
@@ -23,5 +27,5 @@ test('spacing styles', () => {
     }
   };
 
-  expect(generate(config)).toMatchSnapshot();
+  expect(getContent(config)).toMatchSnapshot();
 });

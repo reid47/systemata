@@ -1,6 +1,8 @@
-import { generate } from '../src/index';
+import { getContent } from './test-utils';
 
-const output = { format: 'css' };
+const output = {
+  files: [{ format: 'css', fileName: 'test.css' }]
+};
 
 describe('namespace', () => {
   test('namespace (object with prefix)', () => {
@@ -15,7 +17,7 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config)).toMatchSnapshot();
+    expect(getContent(config)).toMatchSnapshot();
   });
 
   test('namespace (object with parentClass)', () => {
@@ -30,7 +32,7 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config)).toMatchSnapshot();
+    expect(getContent(config)).toMatchSnapshot();
   });
 
   test('namespace (object with peerClass)', () => {
@@ -43,7 +45,7 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config)).toMatchSnapshot();
+    expect(getContent(config)).toMatchSnapshot();
   });
 
   test('namespace (object with multiple namespace types)', () => {
@@ -60,7 +62,7 @@ describe('namespace', () => {
       }
     };
 
-    expect(generate(config)).toMatchSnapshot();
+    expect(getContent(config)).toMatchSnapshot();
   });
 });
 
@@ -77,7 +79,7 @@ describe('propertyMapping', () => {
       }
     };
 
-    expect(generate(config)).toMatchSnapshot();
+    expect(getContent(config)).toMatchSnapshot();
   });
 
   test('excluding properties', () => {
@@ -92,6 +94,6 @@ describe('propertyMapping', () => {
       }
     };
 
-    expect(generate(config)).toMatchSnapshot();
+    expect(getContent(config)).toMatchSnapshot();
   });
 });

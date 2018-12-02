@@ -1,6 +1,8 @@
-import { generate } from '../src/index';
+import { getContent } from './test-utils';
 
-const output = { format: 'docs' };
+const output = {
+  files: [{ format: 'docs', fileName: 'test.html' }]
+};
 
 test('mixed styles', () => {
   const config = {
@@ -15,5 +17,5 @@ test('mixed styles', () => {
     }
   };
 
-  expect(generate(config)).toMatchSnapshot();
+  expect(getContent(config)).toMatchSnapshot();
 });

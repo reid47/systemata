@@ -20,12 +20,6 @@ const propertiesByType: { [type in CssPropertyType]: string[] } = {
   ]
 };
 
-const variableNamePrefix: { [key: string]: string } = {
-  sass: '$',
-  less: '@',
-  'css-variables': '--'
-};
-
 function makeClassName(base: string, config: Config) {
   const { namespace } = config;
   if (!namespace) return `.${base}`;
@@ -35,22 +29,16 @@ function makeClassName(base: string, config: Config) {
 }
 
 function makeVariableName(base: string, config: Config) {
-  const { namespace, output } = config;
-  const varPrefix = variableNamePrefix[output.format] || '';
-  if (!namespace || !namespace.prefix) return `${varPrefix}${base}`;
-  return `${varPrefix}${namespace.prefix}-${base}`;
-}
-
-function makeVariableUsage(variableName: string, config: Config) {
-  if (config.output.format === 'css-variables') return `var(${variableName})`;
-  return variableName;
+  const { namespace } = config;
+  if (!namespace || !namespace.prefix) return base;
+  return `${namespace.prefix}-${base}`;
 }
 
 function makeCssRule(
   type: CssPropertyType,
   selector: string,
   propertyString: string,
-  value: string
+  value: string | Variable
 ): CssRule {
   const properties = propertyString.split(',').map(property => ({ property, value }));
 
@@ -72,9 +60,7 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
         const variableName = makeVariableName(`${propertyType}-${name}`, config);
         const { value } = config[propertyType as CssPropertyType][name];
 
-        const resolvedValue = variableMap.has(variableName)
-          ? makeVariableUsage(variableName, config)
-          : value;
+        const resolvedValue = variableMap.get(variableName) || value;
 
         ruleMap.set(
           className,
@@ -89,8 +75,6 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
 
 export function buildVariableMap(config: Config): VariableMap {
   const variableMap = new Map<string, Variable>();
-
-  if (config.output.format === 'css') return variableMap;
 
   for (const propertyType in propertiesByType) {
     for (const name in config[propertyType as CssPropertyType]) {

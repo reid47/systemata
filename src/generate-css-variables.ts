@@ -6,12 +6,12 @@ export function generateCssVariables(variableMap: VariableMap, ruleMap: RuleMap)
 
   output.push(':root {');
   for (const variable of variableMap.values()) {
-    output.push('  ' + formatVariableDeclaration(variable));
+    output.push('  ' + formatVariableDeclaration(variable, 'css-variables'));
   }
   output.push('}');
 
   for (const rule of ruleMap.values()) {
-    output.push(formatCssRule(rule));
+    output.push(formatCssRule(rule, 'css-variables'));
   }
 
   return output.join('\n');

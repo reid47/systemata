@@ -4,6 +4,7 @@ import * as path from 'path';
 import { Config, CliInput } from '../../types';
 import { resolveConfig } from '../../config';
 import { error } from '../error';
+import { pathGet, pathSet } from '../../utils';
 
 const configFileTemplate = (config: Config) => `module.exports = {
   system: {
@@ -12,14 +13,29 @@ const configFileTemplate = (config: Config) => `module.exports = {
     description: ${JSON.stringify(config.system.description)}
   },
   output: {
+    buildDirectory: ${JSON.stringify(config.output.buildDirectory)},
     archiveDirectory: ${JSON.stringify(config.output.archiveDirectory)},
-    format: "css"
+    files: [
+      {
+        format: 'css',
+        fileName: ${JSON.stringify(config.system.name + '.css')}
+      },
+      {
+        format: 'docs',
+        fileName: ${JSON.stringify(config.system.name + '.html')}
+      }
+    ]
   },
   color: {},
   spacing: {}
 };`;
 
-const prompts = [{ text: 'System name', key: 'name' }, { text: 'Initial version', key: 'version' }];
+const prompts = [
+  { text: 'System name', key: ['system', 'name'] },
+  { text: 'System description', key: ['system', 'description'] },
+  { text: 'Initial version', key: ['system', 'version'] },
+  { text: 'Build output directory', key: ['output', 'buildDirectory'] }
+];
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -29,8 +45,8 @@ const rl = readline.createInterface({
 function ask(config: Config, done: (config: Config) => void, promptIndex = 0) {
   const prompt = prompts[promptIndex];
 
-  rl.question(`${prompt.text} (default: '${config.system[prompt.key]}'): `, answer => {
-    if (answer) config.system[prompt.key] = answer;
+  rl.question(`${prompt.text} (default: '${pathGet(config, prompt.key)}'): `, answer => {
+    if (answer) pathSet(config, prompt.key, answer);
 
     if (promptIndex === prompts.length - 1) {
       rl.close();

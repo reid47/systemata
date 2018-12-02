@@ -53,7 +53,7 @@ export function generateDocs(variableMap: VariableMap, ruleMap: RuleMap): string
   output.push('<h2>Modifier Classes</h2>');
 
   for (const rule of ruleMap.values()) {
-    output.push(formatCssRule(rule));
+    output.push(formatCssRule(rule, 'css'));
   }
 
   output.push('</section>\n');
