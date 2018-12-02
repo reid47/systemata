@@ -22,11 +22,3 @@ export function toTitleCase(str: string) {
 
   return words.join(' ');
 }
-
-export function printJsObject(obj: object) {
-  const json = JSON.stringify(obj, null, 2);
-
-  return json.replace(/\"([a-z]+)\":/gi, (substr, key) => {
-    return `${key}:`;
-  });
-}
