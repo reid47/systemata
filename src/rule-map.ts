@@ -27,18 +27,18 @@ const variableNamePrefix: { [key: string]: string } = {
 };
 
 function makeClassName(base: string, config: Config) {
-  const { settings } = config;
-  if (!settings.namespace) return `.${base}`;
-  const { prefix, peerClass, parentClass } = settings.namespace;
+  const { namespace } = config;
+  if (!namespace) return `.${base}`;
+  const { prefix, peerClass, parentClass } = namespace;
   return `${parentClass ? `.${parentClass} ` : ''}${peerClass ? `.${peerClass}` : ''}.${prefix ||
     ''}${base}`;
 }
 
 function makeVariableName(base: string, config: Config) {
-  const { settings, output } = config;
+  const { namespace, output } = config;
   const varPrefix = variableNamePrefix[output.format] || '';
-  if (!settings.namespace || !settings.namespace.prefix) return `${varPrefix}${base}`;
-  return `${varPrefix}${settings.namespace.prefix}-${base}`;
+  if (!namespace || !namespace.prefix) return `${varPrefix}${base}`;
+  return `${varPrefix}${namespace.prefix}-${base}`;
 }
 
 function makeVariableUsage(variableName: string, config: Config) {
@@ -64,7 +64,7 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
     const properties = propertiesByType[propertyType as CssPropertyType];
 
     for (const property of properties) {
-      const key = config.settings.propertyMapping[property];
+      const key = config.propertyMapping[property];
       if (!key) continue;
 
       for (const name in config[propertyType as CssPropertyType]) {

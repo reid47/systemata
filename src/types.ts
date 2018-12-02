@@ -1,11 +1,16 @@
 export interface Config {
-  settings: {
-    namespace: NamespaceConfig | false;
-    propertyMapping: PropertyMappingConfig;
-  };
+  system: SystemConfig;
+  namespace: NamespaceConfig;
+  propertyMapping: PropertyMappingConfig;
   output: OutputConfig;
   color: ColorConfig;
   spacing: SpacingConfig;
+}
+
+export interface SystemConfig {
+  name: string;
+  version: string;
+  description: string;
 }
 
 export interface OutputConfig {

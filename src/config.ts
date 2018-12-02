@@ -4,25 +4,28 @@ import {
   ColorConfig,
   PropertyMappingConfig,
   SpacingConfig,
-  OutputConfig
+  OutputConfig,
+  SystemConfig
 } from './types';
 
-function resolveOutput(outputConfig: any): OutputConfig {
+function resolveSystem(systemConfig: any): SystemConfig {
+  systemConfig = systemConfig || {};
+
   return {
-    format: outputConfig.format
+    name: systemConfig.name || 'untitled-system',
+    version: systemConfig.version || 'version',
+    description: systemConfig.description || ''
   };
 }
 
-function resolveNamespace(namespaceConfig: any): NamespaceConfig | false {
-  if (!namespaceConfig) return false;
+function resolveOutput(outputConfig: any): OutputConfig {
+  return {
+    format: outputConfig.format || 'css'
+  };
+}
 
-  if (typeof namespaceConfig !== 'object') {
-    return {
-      prefix: typeof namespaceConfig === 'string' ? namespaceConfig : 'sys-',
-      parentClass: false,
-      peerClass: false
-    };
-  }
+function resolveNamespace(namespaceConfig: any): NamespaceConfig {
+  namespaceConfig = namespaceConfig || {};
 
   return {
     prefix: namespaceConfig.prefix || false,
@@ -69,13 +72,10 @@ function resolveSpacing(spacingConfig: any): SpacingConfig {
 }
 
 export function resolveConfig(config: any): Config {
-  config.settings = config.settings || {};
-
   return {
-    settings: {
-      namespace: resolveNamespace(config.settings.namespace),
-      propertyMapping: resolvePropertyMapping(config.settings.propertyMapping)
-    },
+    system: resolveSystem(config.system),
+    namespace: resolveNamespace(config.namespace),
+    propertyMapping: resolvePropertyMapping(config.propertyMapping),
     output: resolveOutput(config.output),
     color: resolveColors(config.color),
     spacing: resolveSpacing(config.spacing)

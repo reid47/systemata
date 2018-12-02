@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`namespace namespace (boolean) 1`] = `
-".sys-bg-primary { background-color: #f00 }
-.sys-bg-secondary { background-color: #0f0 }
-.sys-brc-primary { border-color: #f00 }
-.sys-brc-secondary { border-color: #0f0 }
-.sys-c-primary { color: #f00 }
-.sys-c-secondary { color: #0f0 }
-.sys-fill-primary { fill: #f00 }
-.sys-fill-secondary { fill: #0f0 }"
-`;
-
 exports[`namespace namespace (object with multiple namespace types) 1`] = `
 ".parent .peer.pfx-bg-primary { background-color: #f00 }
 .parent .peer.pfx-bg-secondary { background-color: #0f0 }
@@ -53,17 +42,6 @@ exports[`namespace namespace (object with prefix) 1`] = `
 .wow-c-secondary { color: #0f0 }
 .wow-fill-primary { fill: #f00 }
 .wow-fill-secondary { fill: #0f0 }"
-`;
-
-exports[`namespace namespace (string) 1`] = `
-".rm-bg-primary { background-color: #f00 }
-.rm-bg-secondary { background-color: #0f0 }
-.rm-brc-primary { border-color: #f00 }
-.rm-brc-secondary { border-color: #0f0 }
-.rm-c-primary { color: #f00 }
-.rm-c-secondary { color: #0f0 }
-.rm-fill-primary { fill: #f00 }
-.rm-fill-secondary { fill: #0f0 }"
 `;
 
 exports[`propertyMapping excluding properties 1`] = `
