@@ -56,7 +56,7 @@ export interface PropertyMappingConfig {
 
 export type RuleMap = Map<string, CssRule>;
 
-export type VariableMap = Map<string, Variable>;
+export type VariableMap = ReadonlyMap<string, Variable>;
 
 export type CssPropertyType = 'color' | 'spacing';
 
@@ -80,7 +80,7 @@ export interface Variable {
 }
 
 export interface CliInput {
-  command?: 'archive' | 'build' | 'develop' | 'init';
+  command?: 'archive' | 'build' | 'develop' | 'init' | 'show-config';
   args: {
     help?: boolean;
     version?: boolean;

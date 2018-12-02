@@ -8,6 +8,7 @@ import { usage } from './usage';
 import { init } from './commands/init';
 import { error } from './error';
 import { archive } from './commands/archive';
+import { showConfig } from './commands/show-config';
 
 const input = parseArgs(process.argv.slice(2));
 
@@ -36,6 +37,10 @@ switch (input.command) {
 
   case 'init':
     init(input);
+    break;
+
+  case 'show-config':
+    showConfig(input);
     break;
 
   case undefined:
