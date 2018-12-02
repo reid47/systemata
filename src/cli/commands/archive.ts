@@ -16,9 +16,10 @@ export function archive(input: CliInput) {
     };
 
     const { version } = config.system;
+    const { configFile } = input.args;
     const { archiveDirectory } = config.output;
     const fileName = `system.v${version}.json`;
-    const dirPath = path.resolve(process.cwd(), archiveDirectory);
+    const dirPath = path.resolve(path.dirname(configFile as string), archiveDirectory);
     const filePath = path.resolve(dirPath, fileName);
 
     if (!fs.existsSync(dirPath)) {
@@ -34,6 +35,8 @@ export function archive(input: CliInput) {
     }
 
     fs.writeFileSync(filePath, JSON.stringify(config, null, 2));
+
+    console.log(`Archived version ${version} in file: ${filePath}`);
 
     process.exit(0);
   } catch (err) {
