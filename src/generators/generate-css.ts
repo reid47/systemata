@@ -1,5 +1,5 @@
-import { RuleMap } from './types';
-import { formatCssRule } from './utils';
+import { RuleMap } from '../types';
+import { formatCssRule } from '../utils';
 
 export function generateCss(ruleMap: RuleMap): string {
   const output: string[] = [];

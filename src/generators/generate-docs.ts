@@ -1,5 +1,5 @@
-import { RuleMap, VariableMap, CssPropertyType, Variable } from './types';
-import { formatCssRule, toTitleCase } from './utils';
+import { RuleMap, VariableMap, CssPropertyType, Variable } from '../types';
+import { formatCssRule, toTitleCase } from '../utils';
 
 export function generateDocs(variableMap: VariableMap, ruleMap: RuleMap): string {
   const output: string[] = [];
