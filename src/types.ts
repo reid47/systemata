@@ -74,7 +74,7 @@ export type CssPropertyType = 'color' | 'spacing';
 
 export interface CssProperty {
   property: string;
-  value: string | Variable;
+  value: Variable;
 }
 
 export interface CssRule {

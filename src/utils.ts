@@ -5,25 +5,21 @@ export function formatCssRule(rule: CssRule, format: OutputFileFormat): string {
     .map(prop => {
       let value;
 
-      if (typeof prop.value !== 'string') {
-        switch (format) {
-          case 'sass':
-            value = `$${prop.value.name}`;
-            break;
+      switch (format) {
+        case 'sass':
+          value = `$${prop.value.name}`;
+          break;
 
-          case 'less':
-            value = `@${prop.value.name}`;
-            break;
+        case 'less':
+          value = `@${prop.value.name}`;
+          break;
 
-          case 'css-variables':
-            value = `var(--${prop.value.name})`;
-            break;
+        case 'css-variables':
+          value = `var(--${prop.value.name})`;
+          break;
 
-          default:
-            value = prop.value.value;
-        }
-      } else {
-        value = prop.value;
+        default:
+          value = prop.value.value;
       }
 
       return `${prop.property}: ${value}`;

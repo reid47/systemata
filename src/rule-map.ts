@@ -38,7 +38,7 @@ function makeCssRule(
   type: CssPropertyType,
   selector: string,
   propertyString: string,
-  value: string | Variable
+  value: Variable
 ): CssRule {
   const properties = propertyString.split(',').map(property => ({ property, value }));
 
@@ -58,14 +58,13 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
       for (const name in config[propertyType as CssPropertyType]) {
         const className = makeClassName(`${key}-${name}`, config);
         const variableName = makeVariableName(`${propertyType}-${name}`, config);
-        const { value } = config[propertyType as CssPropertyType][name];
+        const value = variableMap.get(variableName);
 
-        const resolvedValue = variableMap.get(variableName) || value;
+        if (!value) {
+          throw new Error(`No entry for variable: '${variableName}'`);
+        }
 
-        ruleMap.set(
-          className,
-          makeCssRule(propertyType as CssPropertyType, className, property, resolvedValue)
-        );
+        ruleMap.set(className, makeCssRule(propertyType as CssPropertyType, className, property, value));
       }
     }
   }
