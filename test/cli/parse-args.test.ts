@@ -31,6 +31,40 @@ describe('parseArgs', () => {
     expect(args).toEqual({});
   });
 
+  test('init -c config.js', () => {
+    const { args, command } = parseArgs(['init', '-c', 'config.js']);
+    expect(command).toBe('init');
+    expect(args).toEqual({
+      configFile: 'config.js'
+    });
+  });
+
+  test('init --config ./path/to/config.js', () => {
+    const { args, command } = parseArgs(['init', '--config', './path/to/config.js']);
+    expect(command).toBe('init');
+    expect(args).toEqual({
+      configFile: './path/to/config.js'
+    });
+  });
+
+  test('init -c config.js -y', () => {
+    const { args, command } = parseArgs(['init', '-c', 'config.js', '-y']);
+    expect(command).toBe('init');
+    expect(args).toEqual({
+      configFile: 'config.js',
+      skipQuestions: true
+    });
+  });
+
+  test('init -c config.js --yes', () => {
+    const { args, command } = parseArgs(['init', '-c', 'config.js', '--yes']);
+    expect(command).toBe('init');
+    expect(args).toEqual({
+      configFile: 'config.js',
+      skipQuestions: true
+    });
+  });
+
   test('develop', () => {
     const { args, command } = parseArgs(['develop']);
     expect(command).toBe('develop');
@@ -41,5 +75,21 @@ describe('parseArgs', () => {
     const { args, command } = parseArgs(['build']);
     expect(command).toBe('build');
     expect(args).toEqual({});
+  });
+
+  test('build -c config.js', () => {
+    const { args, command } = parseArgs(['build', '-c', 'config.js']);
+    expect(command).toBe('build');
+    expect(args).toEqual({
+      configFile: 'config.js'
+    });
+  });
+
+  test('build --config ./path/to/config.js', () => {
+    const { args, command } = parseArgs(['build', '--config', './path/to/config.js']);
+    expect(command).toBe('build');
+    expect(args).toEqual({
+      configFile: './path/to/config.js'
+    });
   });
 });

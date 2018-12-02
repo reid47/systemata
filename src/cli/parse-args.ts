@@ -1,19 +1,21 @@
-const isFlag = (arg: string) => arg && /^-[-]?[a-z\-]+/i.test(arg);
-
 export const knownCommands = ['init', 'develop', 'build'];
 
 export const knownArgs: { [key: string]: string } = {
   '-h': 'help',
   '--help': 'help',
   '-v': 'version',
-  '--version': 'version'
+  '--version': 'version',
+  '-c': 'configFile',
+  '--config': 'configFile',
+  '-y': 'skipQuestions',
+  '--yes': 'skipQuestions'
 };
 
 export function parseArgs(argv: string[]) {
   const args: { [key: string]: string | boolean } = {};
 
   let command: string | null = null;
-  let lastArg: string;
+  let lastArg: string = '';
 
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
@@ -25,7 +27,11 @@ export function parseArgs(argv: string[]) {
 
     if (knownArgs[arg]) {
       args[knownArgs[arg]] = true;
+    } else if (lastArg && knownArgs[lastArg]) {
+      args[knownArgs[lastArg]] = arg;
     }
+
+    lastArg = arg;
   }
 
   return { args, command };
