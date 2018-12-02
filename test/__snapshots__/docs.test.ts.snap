@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mixed styles 1`] = `
+"<!doctype html>
+<html>
+<body>
+
+<section>
+<h2>Variables</h2>
+<h3>Color</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color-primary</code></td>
+<td><code>#f00</code></td>
+</tr>
+<tr>
+<td><code>color-secondary</code></td>
+<td><code>#0f0</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Spacing</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>spacing-small</code></td>
+<td><code>8px</code></td>
+</tr>
+<tr>
+<td><code>spacing-large</code></td>
+<td><code>64px</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>Modifier Classes</h2>
+.bg-primary { background-color: color-primary }
+.bg-secondary { background-color: color-secondary }
+.brc-primary { border-color: color-primary }
+.brc-secondary { border-color: color-secondary }
+.c-primary { color: color-primary }
+.c-secondary { color: color-secondary }
+.fill-primary { fill: color-primary }
+.fill-secondary { fill: color-secondary }
+.m-small { margin: spacing-small }
+.m-large { margin: spacing-large }
+.mt-small { margin-top: spacing-small }
+.mt-large { margin-top: spacing-large }
+.mb-small { margin-bottom: spacing-small }
+.mb-large { margin-bottom: spacing-large }
+.ml-small { margin-left: spacing-small }
+.ml-large { margin-left: spacing-large }
+.mr-small { margin-right: spacing-small }
+.mr-large { margin-right: spacing-large }
+.mv-small { margin-top: spacing-small; margin-bottom: spacing-small }
+.mv-large { margin-top: spacing-large; margin-bottom: spacing-large }
+.mh-small { margin-left: spacing-small; margin-right: spacing-small }
+.mh-large { margin-left: spacing-large; margin-right: spacing-large }
+.p-small { padding: spacing-small }
+.p-large { padding: spacing-large }
+.pt-small { padding-top: spacing-small }
+.pt-large { padding-top: spacing-large }
+.pb-small { padding-bottom: spacing-small }
+.pb-large { padding-bottom: spacing-large }
+.pl-small { padding-left: spacing-small }
+.pl-large { padding-left: spacing-large }
+.pr-small { padding-right: spacing-small }
+.pr-large { padding-right: spacing-large }
+.pv-small { padding-top: spacing-small; padding-bottom: spacing-small }
+.pv-large { padding-top: spacing-large; padding-bottom: spacing-large }
+.ph-small { padding-left: spacing-small; padding-right: spacing-small }
+.ph-large { padding-left: spacing-large; padding-right: spacing-large }
+</section>
+
+</body>
+</html>"
+`;

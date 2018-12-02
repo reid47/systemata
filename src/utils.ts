@@ -9,3 +9,16 @@ export function formatCssRule(rule: CssRule): string {
 export function formatVariableDeclaration(variable: Variable) {
   return `${variable.name}: ${variable.value};`;
 }
+
+export function capitalizeWord(word: string) {
+  return word[0].toUpperCase() + word.substr(1);
+}
+
+export function toTitleCase(str: string) {
+  const words = str
+    .split(/[ \-]/)
+    .filter(Boolean)
+    .map(capitalizeWord);
+
+  return words.join(' ');
+}

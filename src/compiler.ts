@@ -5,6 +5,7 @@ import { generateSass } from './generate-sass';
 import { generateLess } from './generate-less';
 import { buildRuleMap, buildVariableMap } from './rule-map';
 import { generateCssVariables } from './generate-css-variables';
+import { generateDocs } from './generate-docs';
 
 export class Compiler {
   config: Config;
@@ -28,6 +29,8 @@ export class Compiler {
         return generateLess(variableMap, ruleMap);
       case 'css-variables':
         return generateCssVariables(variableMap, ruleMap);
+      case 'docs':
+        return generateDocs(variableMap, ruleMap);
     }
 
     throw new Error('Unsupported output configuration');

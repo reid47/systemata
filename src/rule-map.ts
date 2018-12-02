@@ -28,7 +28,7 @@ const variableNamePrefix: { [key: string]: string } = {
 
 function makeClassName(base: string, config: Config) {
   const { settings } = config;
-  if (!settings || !settings.namespace) return `.${base}`;
+  if (!settings.namespace) return `.${base}`;
   const { prefix, peerClass, parentClass } = settings.namespace;
   return `${parentClass ? `.${parentClass} ` : ''}${peerClass ? `.${peerClass}` : ''}.${prefix ||
     ''}${base}`;
@@ -37,7 +37,7 @@ function makeClassName(base: string, config: Config) {
 function makeVariableName(base: string, config: Config) {
   const { settings, output } = config;
   const varPrefix = variableNamePrefix[output.format] || '';
-  if (!settings || !settings.namespace || !settings.namespace.prefix) return `${varPrefix}${base}`;
+  if (!settings.namespace || !settings.namespace.prefix) return `${varPrefix}${base}`;
   return `${varPrefix}${settings.namespace.prefix}-${base}`;
 }
 
