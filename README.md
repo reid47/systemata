@@ -1,4 +1,4 @@
-# systematic
+# systemata
 
 a higher-order design system
 

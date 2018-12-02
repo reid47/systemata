@@ -10,7 +10,7 @@ export interface Config {
 export interface ArchivedConfig extends Config {
   __archived: {
     archiveDate: string;
-    systematicVersion: string;
+    systemataVersion: string;
   };
 }
 

@@ -49,8 +49,8 @@ function resolveOutput(outputConfig: any): OutputConfig {
   });
 
   return {
-    buildDirectory: outputConfig.buildDirectory || './systematic-build',
-    archiveDirectory: outputConfig.archiveDirectory || './systematic-archive',
+    buildDirectory: outputConfig.buildDirectory || './systemata-build',
+    archiveDirectory: outputConfig.archiveDirectory || './systemata-archive',
     files
   };
 }

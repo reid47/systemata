@@ -7,8 +7,8 @@ export function getConfig(input: CliInput): Config | undefined {
   const cwd = process.cwd();
 
   const possibleConfigFiles: string[] = [
-    path.resolve(cwd, 'systematic.config.js'),
-    path.resolve(cwd, 'systematic.config.json')
+    path.resolve(cwd, 'systemata.config.js'),
+    path.resolve(cwd, 'systemata.config.json')
   ];
 
   if (typeof configFile === 'string') {

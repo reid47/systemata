@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { CliInput, ArchivedConfig } from '../../types';
 import { error } from '../error';
 import { getConfig } from '../get-config';
-import { version as systematicVersion } from '../../../package.json';
+import { version as systemataVersion } from '../../../package.json';
 
 export function archive(input: CliInput) {
   const config = getConfig(input);
@@ -12,7 +12,7 @@ export function archive(input: CliInput) {
   try {
     (config as ArchivedConfig).__archived = {
       archiveDate: new Date().toISOString(),
-      systematicVersion
+      systemataVersion
     };
 
     const { version } = config.system;

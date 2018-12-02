@@ -1,60 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`archive 1`] = `
-"systematic archive, version 0.0.1
+"systemata archive, version 0.0.1
   Create a static, versioned copy of the current design system.
 
 Usage:
-  systematic archive [options]
+  systemata archive [options]
 
 Global options:
   -h, --help       Print usage information
-  -v, --version    Print systematic version
+  -v, --version    Print systemata version
 
 'archive' options:
   -c, --config <configFile>   Path to config file"
 `;
 
 exports[`build 1`] = `
-"systematic build, version 0.0.1
+"systemata build, version 0.0.1
   Build all design system files
 
 Usage:
-  systematic build [options]
+  systemata build [options]
 
 Global options:
   -h, --help       Print usage information
-  -v, --version    Print systematic version
+  -v, --version    Print systemata version
 
 'build' options:
   -c, --config <configFile>   Path to config file"
 `;
 
 exports[`develop 1`] = `
-"systematic develop, version 0.0.1
+"systemata develop, version 0.0.1
   Start a server that watches files for changes & rebuilds on change.
 
 Usage:
-  systematic develop [options]
+  systemata develop [options]
 
 Global options:
   -h, --help       Print usage information
-  -v, --version    Print systematic version
+  -v, --version    Print systemata version
 
 'develop' options:
   -c, --config <configFile>   Path to config file"
 `;
 
 exports[`init 1`] = `
-"systematic init, version 0.0.1
+"systemata init, version 0.0.1
   Creates a new system config file.
 
 Usage:
-  systematic init [options]
+  systemata init [options]
 
 Global options:
   -h, --help       Print usage information
-  -v, --version    Print systematic version
+  -v, --version    Print systemata version
 
 'init' options:
   -c, --config <configFile>   Path to config file
@@ -62,15 +62,15 @@ Global options:
 `;
 
 exports[`main 1`] = `
-"systematic, version 0.0.1
+"systemata, version 0.0.1
   Build a design system with one file
 
 Usage:
-  systematic <command> [options]
+  systemata <command> [options]
 
 Global options:
   -h, --help       Print usage information
-  -v, --version    Print systematic version
+  -v, --version    Print systemata version
 
 Commands:
   archive          Archive a static copy of current design system
@@ -78,19 +78,19 @@ Commands:
   develop          Start a build server & re-build on change
   init             Create a new design system
 
-For help with a command, use 'systematic <command> -h'."
+For help with a command, use 'systemata <command> -h'."
 `;
 
 exports[`show-config 1`] = `
-"systematic show-config, version 0.0.1
-  Prints resolved system config as systematic sees it. Useful for making sure configuration looks as you expect.
+"systemata show-config, version 0.0.1
+  Prints resolved system config as systemata sees it. Useful for making sure configuration looks as you expect.
 
 Usage:
-  systematic show-config [options]
+  systemata show-config [options]
 
 Global options:
   -h, --help       Print usage information
-  -v, --version    Print systematic version
+  -v, --version    Print systemata version
 
 'show-config' options:
   -c, --config <configFile>   Path to config file"
