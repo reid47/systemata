@@ -66,7 +66,7 @@ export interface PropertyMappingConfig {
   fill: string | boolean;
 }
 
-export type RuleMap = Map<string, CssRule>;
+export type RuleMap = ReadonlyMap<string, CssRule>;
 
 export type VariableMap = ReadonlyMap<string, Variable>;
 
