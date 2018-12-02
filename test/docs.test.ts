@@ -6,12 +6,12 @@ test('mixed styles', () => {
   const config = {
     output,
     color: {
-      primary: '#f00',
-      secondary: '#0f0'
+      primary: { value: '#f00' },
+      secondary: { value: '#0f0' }
     },
     spacing: {
-      small: '8px',
-      large: '64px'
+      small: { value: '8px' },
+      large: { value: '64px' }
     }
   };
 

@@ -10,8 +10,8 @@ describe('namespace', () => {
         prefix: 'wow-'
       },
       color: {
-        primary: '#f00',
-        secondary: '#0f0'
+        primary: { value: '#f00' },
+        secondary: { value: '#0f0' }
       }
     };
 
@@ -25,8 +25,8 @@ describe('namespace', () => {
         parentClass: 'parent'
       },
       color: {
-        primary: '#f00',
-        secondary: '#0f0'
+        primary: { value: '#f00' },
+        secondary: { value: '#0f0' }
       }
     };
 
@@ -38,8 +38,8 @@ describe('namespace', () => {
       output,
       namespace: { peerClass: 'peer' },
       color: {
-        primary: '#f00',
-        secondary: '#0f0'
+        primary: { value: '#f00' },
+        secondary: { value: '#0f0' }
       }
     };
 
@@ -55,8 +55,8 @@ describe('namespace', () => {
         peerClass: 'peer'
       },
       color: {
-        primary: '#f00',
-        secondary: '#0f0'
+        primary: { value: '#f00' },
+        secondary: { value: '#0f0' }
       }
     };
 
@@ -72,8 +72,8 @@ describe('propertyMapping', () => {
         color: 'my-name-for-color'
       },
       color: {
-        primary: '#f00',
-        secondary: '#0f0'
+        primary: { value: '#f00' },
+        secondary: { value: '#0f0' }
       }
     };
 
@@ -87,8 +87,8 @@ describe('propertyMapping', () => {
         fill: false
       },
       color: {
-        primary: '#f00',
-        secondary: '#0f0'
+        primary: { value: '#f00' },
+        secondary: { value: '#0f0' }
       }
     };
 

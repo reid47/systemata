@@ -70,12 +70,16 @@ export function buildRuleMap(config: Config, variableMap: VariableMap): RuleMap 
       for (const name in config[propertyType as CssPropertyType]) {
         const className = makeClassName(`${key}-${name}`, config);
         const variableName = makeVariableName(`${propertyType}-${name}`, config);
+        const { value } = config[propertyType as CssPropertyType][name];
 
-        const value = variableMap.has(variableName)
+        const resolvedValue = variableMap.has(variableName)
           ? makeVariableUsage(variableName, config)
-          : config[propertyType as CssPropertyType][name];
+          : value;
 
-        ruleMap.set(className, makeCssRule(propertyType as CssPropertyType, className, property, value));
+        ruleMap.set(
+          className,
+          makeCssRule(propertyType as CssPropertyType, className, property, resolvedValue)
+        );
       }
     }
   }
@@ -91,11 +95,12 @@ export function buildVariableMap(config: Config): VariableMap {
   for (const propertyType in propertiesByType) {
     for (const name in config[propertyType as CssPropertyType]) {
       const variableName = makeVariableName(`${propertyType}-${name}`, config);
+      const { value } = config[propertyType as CssPropertyType][name];
 
       variableMap.set(variableName, {
         type: propertyType as CssPropertyType,
         name: variableName,
-        value: config[propertyType as CssPropertyType][name]
+        value
       });
     }
   }

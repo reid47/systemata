@@ -10,19 +10,25 @@ export interface Config {
 export interface SystemConfig {
   name: string;
   version: string;
-  description: string;
+  description?: string;
 }
 
 export interface OutputConfig {
   format: 'css' | 'sass' | 'less' | 'css-variables' | 'docs';
 }
 
+export interface ValueDefinition {
+  value: string;
+  description?: string;
+  deprecated?: string | boolean;
+}
+
 export interface ColorConfig {
-  [name: string]: string;
+  [name: string]: ValueDefinition;
 }
 
 export interface SpacingConfig {
-  [name: string]: string;
+  [name: string]: ValueDefinition;
 }
 
 export interface NamespaceConfig {
