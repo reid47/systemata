@@ -3,8 +3,8 @@
 import { develop } from './commands/develop';
 import { build } from './commands/build';
 import { version } from '../../package.json';
-import { parseArgs, knownCommands } from './parse-args';
-import { usage } from './usage';
+import { parseArgs } from './parse-args';
+import { usage, knownCommands } from './usage';
 import { init } from './commands/init';
 import { error } from './error';
 import { archive } from './commands/archive';
@@ -13,7 +13,11 @@ import { showConfig } from './commands/show-config';
 const input = parseArgs(process.argv.slice(2));
 
 if (input.args.help) {
-  console.log(usage);
+  if (input.command && usage[input.command]) {
+    console.log(usage[input.command]);
+  } else {
+    console.log(usage.main);
+  }
   process.exit(0);
 }
 

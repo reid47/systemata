@@ -1,6 +1,5 @@
 import { CliInput } from '../types';
-
-export const knownCommands = ['archive', 'build', 'develop', 'init', 'show-config'];
+import { knownCommands } from './usage';
 
 export const knownArgs: { [key: string]: string } = {
   '-h': 'help',
