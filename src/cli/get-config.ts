@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { CliInput, Config } from '../types';
 import { error } from './error';
+import { resolveConfig } from '../config';
 
 export function getConfig(input: CliInput): Config | undefined {
   const { configFile } = input.args;
@@ -16,11 +17,14 @@ export function getConfig(input: CliInput): Config | undefined {
   }
 
   let config: Config | undefined;
+  let configFilePath = '<unknown>';
+
   const errorMessages = [];
 
   for (let i = 0; i < possibleConfigFiles.length; i++) {
     try {
       config = require(possibleConfigFiles[i]);
+      configFilePath = possibleConfigFiles[i];
       break;
     } catch (err) {
       errorMessages.push(err.message);
@@ -32,5 +36,5 @@ export function getConfig(input: CliInput): Config | undefined {
     return;
   }
 
-  return config;
+  return resolveConfig(config, configFilePath);
 }

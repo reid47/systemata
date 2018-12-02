@@ -1,3 +1,4 @@
+import * as path from 'path';
 import {
   NamespaceConfig,
   Config,
@@ -29,7 +30,7 @@ function resolveSystem(systemConfig: any): SystemConfig {
   };
 }
 
-function resolveOutput(outputConfig: any): OutputConfig {
+function resolveOutput(outputConfig: any, configFileDir: string): OutputConfig {
   outputConfig = outputConfig || {};
 
   const files: OutputFileConfig[] = [];
@@ -49,8 +50,8 @@ function resolveOutput(outputConfig: any): OutputConfig {
   });
 
   return {
-    buildDirectory: outputConfig.buildDirectory || './systemata-build',
-    archiveDirectory: outputConfig.archiveDirectory || './systemata-archive',
+    buildDirectory: path.resolve(configFileDir, outputConfig.buildDirectory || './systemata-build'),
+    archiveDirectory: path.resolve(configFileDir, outputConfig.archiveDirectory || './systemata-archive'),
     files
   };
 }
@@ -102,14 +103,17 @@ function resolveSpacing(spacingConfig: any): SpacingConfig {
   return spacingConfig as SpacingConfig;
 }
 
-export function resolveConfig(config: any): Config {
+export function resolveConfig(config: any, configFilePath: string): Config {
   config = config || {};
 
+  const configFileDir = path.dirname(configFilePath);
+
   return {
+    __configFilePath: configFilePath,
     system: resolveSystem(config.system),
     namespace: resolveNamespace(config.namespace),
     propertyMapping: resolvePropertyMapping(config.propertyMapping),
-    output: resolveOutput(config.output),
+    output: resolveOutput(config.output, configFileDir),
     color: resolveColors(config.color),
     spacing: resolveSpacing(config.spacing)
   };

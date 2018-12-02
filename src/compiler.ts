@@ -7,7 +7,7 @@ export class Compiler {
   config: Config;
 
   constructor(config: any) {
-    this.config = resolveConfig(config);
+    this.config = resolveConfig(config, '<unknown>');
   }
 
   generateFile(file: OutputFileConfig, variableMap: VariableMap, ruleMap: RuleMap): GeneratedFile {
