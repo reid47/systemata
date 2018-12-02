@@ -70,3 +70,13 @@ export interface Variable {
   name: string;
   value: string;
 }
+
+export interface CliInput {
+  command?: 'init' | 'develop' | 'build';
+  args: {
+    help?: boolean;
+    version?: boolean;
+    configFile?: string;
+    skipQuestions?: boolean;
+  };
+}

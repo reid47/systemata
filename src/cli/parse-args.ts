@@ -1,3 +1,5 @@
+import { CliInput } from '../types';
+
 export const knownCommands = ['init', 'develop', 'build'];
 
 export const knownArgs: { [key: string]: string } = {
@@ -11,10 +13,10 @@ export const knownArgs: { [key: string]: string } = {
   '--yes': 'skipQuestions'
 };
 
-export function parseArgs(argv: string[]) {
+export function parseArgs(argv: string[]): CliInput {
   const args: { [key: string]: string | boolean } = {};
 
-  let command: string | null = null;
+  let command: string | undefined;
   let lastArg: string = '';
 
   for (let i = 0; i < argv.length; i++) {
@@ -34,5 +36,5 @@ export function parseArgs(argv: string[]) {
     lastArg = arg;
   }
 
-  return { args, command };
+  return { args, command } as CliInput;
 }

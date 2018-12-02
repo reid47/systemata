@@ -1,8 +1,9 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Config } from '../types';
+import { Config, CliInput } from '../types';
 import { resolveConfig } from '../config';
+import { error } from './error';
 
 const configFileTemplate = (config: Config) => `module.exports = {
   system: {
@@ -48,16 +49,28 @@ function writeFile(configFile: string, contents: string) {
   }
 }
 
-export function init(configFile: string, skipQuestions: boolean) {
+export function init(input: CliInput) {
+  const { configFile, skipQuestions } = input.args;
+
+  if (!configFile || typeof configFile !== 'string') {
+    error(
+      "No config file specified. Use '-c' or '--config' to pass a path where a system config file should be created."
+    );
+  }
+
+  if (fs.existsSync(path.resolve(process.cwd(), configFile as string))) {
+    error(`File '${configFile}' already exists. Please specify a file name that doesn't exist.`);
+  }
+
   const defaultConfig = resolveConfig({});
 
   if (skipQuestions) {
     const output = configFileTemplate(defaultConfig);
-    return writeFile(configFile, output);
+    return writeFile(configFile as string, output);
   }
 
   ask(defaultConfig, userConfig => {
     const output = configFileTemplate(userConfig);
-    writeFile(configFile, output);
+    writeFile(configFile as string, output);
   });
 }

@@ -3,25 +3,25 @@ import { parseArgs } from '../../src/cli/parse-args';
 describe('parseArgs', () => {
   test('-h', () => {
     const { args, command } = parseArgs(['-h']);
-    expect(command).toBeNull();
+    expect(command).toBeUndefined();
     expect(args.help).toBeTruthy();
   });
 
   test('--help', () => {
     const { args, command } = parseArgs(['--help']);
-    expect(command).toBeNull();
+    expect(command).toBeUndefined();
     expect(args.help).toBeTruthy();
   });
 
   test('-v', () => {
     const { args, command } = parseArgs(['-v']);
-    expect(command).toBeNull();
+    expect(command).toBeUndefined();
     expect(args.version).toBeTruthy();
   });
 
   test('--version', () => {
     const { args, command } = parseArgs(['--version']);
-    expect(command).toBeNull();
+    expect(command).toBeUndefined();
     expect(args.version).toBeTruthy();
   });
 
