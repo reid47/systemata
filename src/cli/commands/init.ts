@@ -82,7 +82,7 @@ export function init(input: CliInput) {
     error(`File '${configFile}' already exists. Please specify a file name that doesn't exist.`);
   }
 
-  const defaultConfig = resolveConfig({});
+  const defaultConfig = resolveConfig({}, '');
 
   if (skipQuestions) {
     const output = configFileTemplate(defaultConfig);

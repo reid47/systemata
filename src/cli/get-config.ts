@@ -1,6 +1,6 @@
 import * as path from 'path';
+import * as fs from 'fs';
 import { CliInput, Config } from '../types';
-import { error } from './error';
 import { resolveConfig } from '../config';
 import { name } from '../../package.json';
 
@@ -8,34 +8,39 @@ export function getConfig(input: CliInput): Config | undefined {
   const { configFile } = input.args;
   const cwd = process.cwd();
 
-  const possibleConfigFiles: string[] = [
-    path.resolve(cwd, `${name}.config.js`),
-    path.resolve(cwd, `${name}.config.json`)
-  ];
-
-  if (typeof configFile === 'string') {
-    possibleConfigFiles.unshift(path.resolve(cwd, configFile));
-  }
-
-  let config: Config | undefined;
   let configFilePath = '';
 
-  const errorMessages = [];
+  if (typeof configFile === 'string') {
+    configFilePath = path.resolve(cwd, configFile);
 
-  for (let i = 0; i < possibleConfigFiles.length; i++) {
-    try {
-      config = require(possibleConfigFiles[i]);
-      configFilePath = possibleConfigFiles[i];
-      break;
-    } catch (err) {
-      errorMessages.push(err.message);
+    if (!fs.existsSync(configFilePath)) {
+      throw new Error(`File not found: '${configFilePath}'`);
+    }
+  } else {
+    const possibleConfigFiles: string[] = [
+      path.resolve(cwd, `${name}.config.js`),
+      path.resolve(cwd, `${name}.config.json`)
+    ];
+
+    for (const filePath of possibleConfigFiles) {
+      if (fs.existsSync(filePath)) {
+        configFilePath = filePath;
+        break;
+      }
+    }
+
+    if (!configFilePath) {
+      throw new Error(
+        `No config file found. Looked for: ${possibleConfigFiles.map(f => `'${f}'`).join(' or ')}`
+      );
     }
   }
 
-  if (!config) {
-    error(`Could not load config file: ${errorMessages.join(' ')}`);
-    return;
+  try {
+    const config = require(configFilePath) as Config;
+    return resolveConfig(config, configFilePath);
+  } catch (err) {
+    console.error(`Failed to load config file: '${configFilePath}'`);
+    throw err;
   }
-
-  return resolveConfig(config, configFilePath);
 }

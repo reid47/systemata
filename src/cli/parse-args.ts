@@ -1,5 +1,4 @@
 import { CliInput } from '../types';
-import { knownCommands } from './usage';
 
 export const knownArgs: { [key: string]: string } = {
   '-h': 'help',
@@ -12,6 +11,8 @@ export const knownArgs: { [key: string]: string } = {
   '--yes': 'skipQuestions'
 };
 
+const isFlag = (arg: string) => /^-[-]?[a-zA-Z]/.test(arg);
+
 export function parseArgs(argv: string[]): CliInput {
   const args: { [key: string]: string | boolean } = {};
 
@@ -21,7 +22,7 @@ export function parseArgs(argv: string[]): CliInput {
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
 
-    if (i === 0 && knownCommands.includes(arg)) {
+    if (i === 0 && !isFlag(arg)) {
       command = arg;
       continue;
     }
