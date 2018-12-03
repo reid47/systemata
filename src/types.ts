@@ -1,5 +1,6 @@
 export interface Config {
   __configFilePath: string;
+  __systemataVersion: string;
   system: SystemConfig;
   namespace: NamespaceConfig;
   propertyMapping: PropertyMappingConfig;

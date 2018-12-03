@@ -9,6 +9,7 @@ import {
   SystemConfig,
   OutputFileConfig
 } from './types';
+import { version as systemataVersion } from '../package.json';
 import { parseSemVer } from './utils';
 import { ConfigurationError } from './config-error';
 
@@ -110,6 +111,7 @@ export function resolveConfig(config: any, configFilePath: string): Config {
 
   return {
     __configFilePath: configFilePath,
+    __systemataVersion: systemataVersion,
     system: resolveSystem(config.system),
     namespace: resolveNamespace(config.namespace),
     propertyMapping: resolvePropertyMapping(config.propertyMapping),
