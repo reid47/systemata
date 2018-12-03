@@ -1,7 +1,7 @@
-import { RuleMap, VariableMap } from '../types';
-import { formatCssRule, formatVariableDeclaration } from '../utils';
+import { RuleMap, VariableMap } from '../../types';
+import { formatCssRule, formatVariableDeclaration } from '../../utils';
 
-export function generateCssVariables(variableMap: VariableMap, ruleMap: RuleMap): string {
+export function generate(variableMap: VariableMap, ruleMap: RuleMap): string {
   const output: string[] = [];
 
   output.push(':root {');

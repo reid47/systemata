@@ -1,5 +1,5 @@
-export { generateCss } from './generate-css';
-export { generateCssVariables } from './generate-css-variables';
-export { generateSass } from './generate-sass';
-export { generateLess } from './generate-less';
-export { generateDocs } from './generate-docs';
+export { generate as generateCss } from './css/generate-css';
+export { generate as generateCssVariables } from './css-variables/generate';
+export { generate as generateSass } from './sass/generate-sass';
+export { generate as generateLess } from './less/generate';
+export { generate as generateDocs } from './docs/generate';

@@ -1,7 +1,7 @@
-import { RuleMap, VariableMap } from '../types';
-import { formatCssRule, formatVariableDeclaration } from '../utils';
+import { RuleMap, VariableMap } from '../../types';
+import { formatCssRule, formatVariableDeclaration } from '../../utils';
 
-export function generateLess(variableMap: VariableMap, ruleMap: RuleMap): string {
+export function generate(variableMap: VariableMap, ruleMap: RuleMap): string {
   const output: string[] = [];
 
   for (const variable of variableMap.values()) {

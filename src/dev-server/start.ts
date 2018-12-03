@@ -4,13 +4,22 @@ import { DevServer } from './dev-server';
 
 const devServer = new DevServer();
 
+const contentTypes: { [key: string]: string } = {
+  html: 'text/html'
+};
+
 const server = http.createServer((req, res) => {
   const { method, url } = req;
 
   if (method === 'GET' && url && url.startsWith('/files')) {
     try {
       const fileContents = devServer.readFile(url);
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      const extension = url.split('.').pop() || '';
+
+      res.writeHead(200, {
+        'Content-Type': contentTypes[extension] || 'text/plain'
+      });
+
       res.write(fileContents);
     } catch {
       res.writeHead(404, 'File not found');
