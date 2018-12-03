@@ -7,7 +7,8 @@ import {
   SpacingConfig,
   OutputConfig,
   SystemConfig,
-  OutputFileConfig
+  OutputFileConfig,
+  DevelopmentConfig
 } from './types';
 import { version as systemataVersion } from '../package.json';
 import { parseSemVer } from './utils';
@@ -28,6 +29,14 @@ function resolveSystem(systemConfig: any): SystemConfig {
     name: systemConfig.name || 'untitled-system',
     version,
     description: systemConfig.description || ''
+  };
+}
+
+function resolveDevelopment(devConfig: any): DevelopmentConfig {
+  devConfig = devConfig || {};
+
+  return {
+    serverPort: devConfig.serverPort || 4700
   };
 }
 
@@ -113,6 +122,7 @@ export function resolveConfig(config: any, configFilePath: string): Config {
     __configFilePath: configFilePath,
     __systemataVersion: systemataVersion,
     system: resolveSystem(config.system),
+    development: resolveDevelopment(config.development),
     namespace: resolveNamespace(config.namespace),
     propertyMapping: resolvePropertyMapping(config.propertyMapping),
     output: resolveOutput(config.output, configFileDir),

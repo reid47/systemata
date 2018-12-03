@@ -3,6 +3,7 @@ export interface Config {
   __systemataVersion: string;
   system: SystemConfig;
   namespace: NamespaceConfig;
+  development: DevelopmentConfig;
   propertyMapping: PropertyMappingConfig;
   output: OutputConfig;
   color: ColorConfig;
@@ -21,6 +22,10 @@ export interface SystemConfig {
   name: string;
   version: string;
   description?: string;
+}
+
+export interface DevelopmentConfig {
+  serverPort: number;
 }
 
 export type OutputFileFormat = 'css' | 'sass' | 'less' | 'css-variables' | 'docs';
