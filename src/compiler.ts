@@ -1,6 +1,6 @@
 import { resolveConfig } from './config';
 import { Config, OutputFileConfig, VariableMap, RuleMap, GeneratedFile } from './types';
-import { buildRuleMap, buildVariableMap } from './rule-map';
+import { buildRuleMap, buildVariableMap } from './build-maps';
 import * as generators from './generators';
 
 export class Compiler {
